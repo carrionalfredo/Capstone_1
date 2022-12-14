@@ -7,4 +7,5 @@ The objective of this project, is to develop an machine learning model for class
 
 For this, I propose to build and train a deep learning model, taking a dataset of pistachios varieties as training data for the model.
 
+![alt text](https://github.com/carrionalfredo/Capstone_1/blob/main/images/readme/640px-Pistachio_vera.jpg)
 [De THOR - Pistachio, CC BY 2.0](https://commons.wikimedia.org/w/index.php?curid=40606682)
