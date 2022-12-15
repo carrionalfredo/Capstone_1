@@ -78,14 +78,14 @@ Pistachio_Image_Dataset/Pistachio_Image_Dataset
 <figure>
   <img
   src="https://github.com/carrionalfredo/Capstone_1/blob/main/images/kimizi_images_dataset.jpg"
-  alt="Kimizi images in dataset folder.">
-  <figcaption>Kimizi images dataset</figcaption>
+  alt="Kimizi images in dataset folder."
+  title="Kimizi images dataset">
 </figure>
 
 
 <figure>
   <img
   src="https://github.com/carrionalfredo/Capstone_1/blob/main/images/siirt_images_dataset.jpg"
-  alt="Siirt images in dataset folder.">
-  <figcaption>Siirt images dataset</figcaption>
+  alt="Siirt images in dataset folder."
+  title="Siirt images dataset">
 </figure>
