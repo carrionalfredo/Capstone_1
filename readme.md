@@ -9,8 +9,7 @@ For this, I propose to build and train a deep learning model, taking a dataset o
 
 ## Pistachios
 ![alt text](https://github.com/carrionalfredo/Capstone_1/blob/main/images/readme/640px-Pistachio_vera.jpg)
-
-[De THOR - Pistachio, CC BY 2.0](https://commons.wikimedia.org/w/index.php?curid=40606682)
+[From THOR - Pistachio, CC BY 2.0](https://commons.wikimedia.org/w/index.php?curid=40606682)
 
 The pistachio (Pistacia vera), a member of the cashew family, is a small tree originating from Central Asia and the Middle East. The tree produces seeds that are widely consumed as food.
 
@@ -60,7 +59,7 @@ Average size pistachio, less long than ‘Mateur ". Original from Cyprus. It is 
 " Aegina ‘
 Medium size fruit, long and similar to " Mateur ". It comes from Greece and it also gives good results in Spain.
 
-![alt text](https://www.frutas-hortalizas.com/Fruits/Types-varieties-Pistachio-nut.html)
+[Source](https://www.frutas-hortalizas.com/Fruits/Types-varieties-Pistachio-nut.html)
 
 ## Dataset
 
@@ -76,7 +75,17 @@ Pistachio_Image_Dataset/Pistachio_Image_Dataset
 └── Siirt_Pistachio
 ```
 
-![kimizi](https://github.com/carrionalfredo/Capstone_1/blob/main/images/kimizi_images_dataset.jpg)
+<figure>
+  <img
+  src="https://github.com/carrionalfredo/Capstone_1/blob/main/images/kimizi_images_dataset.jpg"
+  alt="Kimizi images in dataset folder.">
+  <figcaption>Kimizi images dataset</figcaption>
+</figure>
 
 
-![siirt](https://github.com/carrionalfredo/Capstone_1/blob/main/images/siirt_images_dataset.jpg)
+<figure>
+  <img
+  src="https://github.com/carrionalfredo/Capstone_1/blob/main/images/siirt_images_dataset.jpg"
+  alt="Siirt images in dataset folder.">
+  <figcaption>Siirt images dataset</figcaption>
+</figure>
