@@ -75,11 +75,14 @@ Pistachio_Image_Dataset/Pistachio_Image_Dataset
 └── Siirt_Pistachio
 ```
 
+![Kimizi images in dataset folder](https://github.com/carrionalfredo/Capstone_1/blob/main/images/kimizi_images_dataset.jpg “Kimizi images dataset”)
+
 <figure>
   <img
   src="https://github.com/carrionalfredo/Capstone_1/blob/main/images/kimizi_images_dataset.jpg"
   alt="Kimizi images in dataset folder."
   title="Kimizi images dataset">
+  <figcaption>Kimizi images dataset</figcaption>
 </figure>
 
 
@@ -88,4 +91,5 @@ Pistachio_Image_Dataset/Pistachio_Image_Dataset
   src="https://github.com/carrionalfredo/Capstone_1/blob/main/images/siirt_images_dataset.jpg"
   alt="Siirt images in dataset folder."
   title="Siirt images dataset">
+  <figcaption>Siirt images dataset</figcaption>
 </figure>
