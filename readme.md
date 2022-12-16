@@ -8,7 +8,7 @@ The objective of this project, is to develop an machine learning model for class
 For this, I propose to build and train a deep learning model, taking a dataset of pistachios varieties as training data for the model.
 
 ## Pistachios
-![alt text](https://github.com/carrionalfredo/Capstone_1/blob/main/images/readme/640px-Pistachio_vera.jpg)
+![alt text](https://github.com/carrionalfredo/Capstone_1/blob/main/images/640px-Pistachio_vera.jpg)
 [From THOR - Pistachio, CC BY 2.0](https://commons.wikimedia.org/w/index.php?curid=40606682)
 
 The pistachio (Pistacia vera), a member of the cashew family, is a small tree originating from Central Asia and the Middle East. The tree produces seeds that are widely consumed as food.
@@ -63,9 +63,9 @@ Medium size fruit, long and similar to " Mateur ". It comes from Greece and it a
 
 ## Dataset
 
-The dataset used in this project is a dataset of 2148 images of pistachios, 1232 of Kirmizi type and 916 of Siirt type. This dataset can be found in [Visualdata.io](https://visualdata.io/discovery/dataset/906f860910230c325f1fa63da88f6c847a06724a)
+The dataset used in this project is a dataset of 2148 600x600px jpeg images of pistachios, 1232 of Kirmizi type and 916 of Siirt type. This dataset can be found in [Visualdata.io](https://visualdata.io/discovery/dataset/906f860910230c325f1fa63da88f6c847a06724a)
 
-![alt text](https://www.mdpi.com/electronics/electronics-11-00981/article_deploy/html/images/electronics-11-00981-g001.png)
+![Dataset source](https://www.mdpi.com/electronics/electronics-11-00981/article_deploy/html/images/electronics-11-00981-g001.png)
 [source: Visualdata.io](https://visualdata.io/discovery/dataset/906f860910230c325f1fa63da88f6c847a06724a)
 
 The data set is organized of the following way:
@@ -91,3 +91,61 @@ Pistachio_Image_Dataset/Pistachio_Image_Dataset
   title="Siirt images dataset">
   <figcaption>Siirt images dataset</figcaption>
 </figure>
+
+## Preparation of the dataset
+
+The preparation of the dataset consists of the following steps:
+
+```python
+ImageDataGenerator(
+    preprocessing_function=preprocess_input,
+    shear_range=10.0,
+    zoom_range=0.1,
+    vertical_flip=True
+    )
+```
+
+```python
+image_gen.flow_from_directory(
+    './Pistachio_Image_Dataset/Pistachio_Image_Dataset/',
+    target_size=(150,150),
+    batch_size=32
+    )
+```
+
+After that, the datat set consist of:
+```
+Found 2148 images belonging to 2 classes.
+{'Kirmizi_Pistachio': 0, 'Siirt_Pistachio': 1}
+````
+
+Then split the data set in train, validation and test sets, with a distribution of 60%, 20%, and  20%.
+
+## Build of the base model
+
+The base model consist of:
+- Conv2D input layer.
+- MaxPool2D hidden layer.
+- Dropout hidden layer.
+- Flatten hidden layer.
+- Dense hidden layer.
+- Dense output layer.
+
+Defined by:
+```python
+model.add(Conv2D(32,3,3, input_shape = (150,150,3), activation = 'relu'))
+
+  model.add(MaxPool2D(2,2))
+
+  model.add(Dropout(droprate, seed=1))
+
+  model.add(Flatten())
+
+  model.add(Dense(128, activation='relu'))
+
+  model.add(Dense(2, activation='softmax', name = 'output'))
+```
+
+For ompilation of the model, is used ``Adam`` optimizer and the loss function is ``CategoricalCrossentropy``.
+
+!['Base model](https://github.com/carrionalfredo/Capstone_1/blob/main/images/base_model.png)
