@@ -13,7 +13,7 @@ For this, I propose to build and train a deep learning model, taking a dataset o
 
 The pistachio (Pistacia vera), a member of the cashew family, is a small tree originating from Central Asia and the Middle East. The tree produces seeds that are widely consumed as food.
 
-### Pistachio varieties
+### Pistachio Varieties
 
 They are classified according to their origin; their colour and size differentiates them. The main types of pistachio are the pistachio of Sicily, which is green, the smaller Tunis and the Pistachio of Levante, yellow and therefore less appreciated commercially.
 
@@ -149,3 +149,66 @@ model.add(Conv2D(32,3,3, input_shape = (150,150,3), activation = 'relu'))
 For ompilation of the model, is used ``Adam`` optimizer and the loss function is ``CategoricalCrossentropy``.
 
 !['Base model](https://github.com/carrionalfredo/Capstone_1/blob/main/images/base_model.png)
+
+## Training of the model
+
+### Training of the base model
+
+The base model was trained with the following hyperparameters:
+```python
+neurons=32
+droprate = 0.5
+learning_rate=0.001
+batch_size = 32
+epochs = 100
+```
+The training & validation accuracy and loss values obtained are the following:
+
+![Base model](https://github.com/carrionalfredo/Capstone_1/blob/main/images/Base_model_results.png)
+
+The evaluation of the base model with the test data are:
+
+```
+Test loss:  1.506 Test accuracy:  0.4286
+```
+### Hyperparameters tuning
+
+In order to improve the accuracy and reduce the loss values, the parameters ```learning_rate``` and ```droprate``` were tuned. After that process, the final model parameters are:
+- ```learning_rate = 0.0001```.
+- ```droprate = 0.6```.
+
+The training & validation accuracy and loss values obtained for the final model are the following:
+
+![Final model](https://github.com/carrionalfredo/Capstone_1/blob/main/images/Final_model_results.png)
+
+Finally, the summary of this final model is next.
+
+````
+Model: "Final_model"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ conv2d_20 (Conv2D)          (None, 50, 50, 32)        896       
+                                                                 
+ max_pooling2d_20 (MaxPoolin  (None, 25, 25, 32)       0         
+ g2D)                                                            
+                                                                 
+ dropout_20 (Dropout)        (None, 25, 25, 32)        0         
+                                                                 
+ flatten_20 (Flatten)        (None, 20000)             0         
+                                                                 
+ dense_20 (Dense)            (None, 128)               2560128   
+                                                                 
+ output (Dense)              (None, 2)                 258       
+                                                                 
+=================================================================
+Total params: 2,561,282
+Trainable params: 2,561,282
+Non-trainable params: 0
+_________________________________________________________________
+````
+For this configration of the final model, the evaluation with test data are the following:
+
+````
+Test loss:  0.8363 Test accuracy:  0.4286
+````
