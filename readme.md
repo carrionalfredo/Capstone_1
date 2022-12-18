@@ -9,6 +9,7 @@ For this, I propose to build and train a deep learning model, taking a dataset o
 
 ## Pistachios
 ![alt text](https://github.com/carrionalfredo/Capstone_1/blob/main/images/640px-Pistachio_vera.jpg)
+
 [From THOR - Pistachio, CC BY 2.0](https://commons.wikimedia.org/w/index.php?curid=40606682)
 
 The pistachio (Pistacia vera), a member of the cashew family, is a small tree originating from Central Asia and the Middle East. The tree produces seeds that are widely consumed as food.
@@ -63,12 +64,12 @@ Medium size fruit, long and similar to " Mateur ". It comes from Greece and it a
 
 ## Dataset
 
-The dataset used in this project is a dataset of 2148 600x600px jpeg images of pistachios, 1232 of Kirmizi type and 916 of Siirt type. This dataset can be found in [Visualdata.io](https://visualdata.io/discovery/dataset/906f860910230c325f1fa63da88f6c847a06724a)
+The dataset used in this project is a dataset of 2148 600x600px jpeg images of pistachios, 1232 of Kirmizi type and 916 of Siirt type. This dataset was obtained from [Visualdata.io](https://visualdata.io), and can be found in this [link](https://visualdata.io/discovery/dataset/906f860910230c325f1fa63da88f6c847a06724a)
 
 ![Dataset source](https://www.mdpi.com/electronics/electronics-11-00981/article_deploy/html/images/electronics-11-00981-g001.png)
 [source: Visualdata.io](https://visualdata.io/discovery/dataset/906f860910230c325f1fa63da88f6c847a06724a)
 
-The data set is organized of the following way:
+The dataset is organized of the following way:
 ```
 Pistachio_Image_Dataset/Pistachio_Image_Dataset
 ├── Kirmizi_Pistachio
@@ -94,37 +95,24 @@ Pistachio_Image_Dataset/Pistachio_Image_Dataset
 
 ## Preparation of the dataset
 
-The preparation of the dataset consists of the following steps:
+Load the images dataset from the  ```Pistachio_Image_Dataset``` folder, and build the train and validation subsets with this parameters: ```batch_size = 32```, ```img_height = 150```, and ```img_width = 150```, through the ```image_dataset_from_directory``` Keras utility, with ```validation_split=0.2```. The results are:
 
-```python
-ImageDataGenerator(
-    preprocessing_function=preprocess_input,
-    shear_range=10.0,
-    zoom_range=0.1,
-    vertical_flip=True
-    )
+```
+Found 2148 files belonging to 2 classes.
+Using 1719 files for training.
+Using 429 files for validation.
 ```
 
-```python
-image_gen.flow_from_directory(
-    './Pistachio_Image_Dataset/Pistachio_Image_Dataset/',
-    target_size=(150,150),
-    batch_size=32
-    )
+The classes of the dataset are:
 ```
-
-After that, the datat set consist of:
-```
-Found 2148 images belonging to 2 classes.
-{'Kirmizi_Pistachio': 0, 'Siirt_Pistachio': 1}
+['Kirmizi_Pistachio', 'Siirt_Pistachio']
 ````
-
-Then split the data set in train, validation and test sets, with a distribution of 60%, 20%, and  20%.
 
 ## Build of the base model
 
 The base model consist of:
-- Conv2D input layer.
+- Rescaling layer
+- Conv2D layer.
 - MaxPool2D hidden layer.
 - Dropout hidden layer.
 - Flatten hidden layer.
@@ -133,20 +121,32 @@ The base model consist of:
 
 Defined by:
 ```python
+model = Sequential(name = name)
+    
+model.add(Rescaling(1./255))
+    
 model.add(Conv2D(32,3,3, input_shape = (150,150,3), activation = 'relu'))
-
-  model.add(MaxPool2D(2,2))
-
-  model.add(Dropout(droprate, seed=1))
-
-  model.add(Flatten())
-
-  model.add(Dense(128, activation='relu'))
-
-  model.add(Dense(2, activation='softmax', name = 'output'))
+    
+model.add(MaxPool2D(2,2))
+    
+model.add(Dropout(droprate))
+    
+model.add(Flatten())
+    
+model.add(Dense(32, activation='relu'))
+    
+model.add(Dense(2, activation='softmax', name = 'output'))
+    
+model.compile(
+  optimizer = keras.optimizers.Adam(
+    learning_rate = learning_rate
+    ),
+    loss=keras.losses.SparseCategoricalCrossentropy(),
+    metrics=['accuracy']
+    )
 ```
 
-For ompilation of the model, is used ``Adam`` optimizer and the loss function is ``CategoricalCrossentropy``.
+For ompilation of the model, is used ``Adam`` optimizer and the loss function is ``SparseCategoricalCrossentropy``.
 
 !['Base model](https://github.com/carrionalfredo/Capstone_1/blob/main/images/base_model.png)
 
@@ -156,59 +156,52 @@ For ompilation of the model, is used ``Adam`` optimizer and the loss function is
 
 The base model was trained with the following hyperparameters:
 ```python
-neurons=32
 droprate = 0.5
 learning_rate=0.001
-batch_size = 32
 epochs = 100
 ```
 The training & validation accuracy and loss values obtained are the following:
 
-![Base model](https://github.com/carrionalfredo/Capstone_1/blob/main/images/Base_model_results.png)
+![Base model](https://github.com/carrionalfredo/Capstone_1/raw/main/images/Base_model_results.png)
 
-The evaluation of the base model with the test data are:
-
-```
-Test loss:  1.506 Test accuracy:  0.4286
-```
 ### Hyperparameters tuning
 
 In order to improve the accuracy and reduce the loss values, the parameters ```learning_rate``` and ```droprate``` were tuned. After that process, the final model parameters are:
 - ```learning_rate = 0.0001```.
 - ```droprate = 0.6```.
 
+Also, the ```epochs``` parameter was set equals ```60```.
+
 The training & validation accuracy and loss values obtained for the final model are the following:
 
-![Final model](https://github.com/carrionalfredo/Capstone_1/blob/main/images/Final_model_results.png)
+![Final model](https://github.com/carrionalfredo/Capstone_1/raw/main/images/Final_model_results.png)
 
 Finally, the summary of this final model is next.
 
 ````
-Model: "Final_model"
+Model: "Final_Model"
 _________________________________________________________________
  Layer (type)                Output Shape              Param #   
 =================================================================
- conv2d_20 (Conv2D)          (None, 50, 50, 32)        896       
+ rescaling (Rescaling)     (None, 150, 150, 3)       0         
                                                                  
- max_pooling2d_20 (MaxPoolin  (None, 25, 25, 32)       0         
- g2D)                                                            
+ conv2d (Conv2D)           (None, 50, 50, 32)        896       
                                                                  
- dropout_20 (Dropout)        (None, 25, 25, 32)        0         
+ max_pooling2d (MaxPooling  (None, 25, 25, 32)       0         
+ 2D)                                                             
                                                                  
- flatten_20 (Flatten)        (None, 20000)             0         
+ dropout (Dropout)         (None, 25, 25, 32)        0         
                                                                  
- dense_20 (Dense)            (None, 128)               2560128   
+ flatten (Flatten)         (None, 20000)             0         
                                                                  
- output (Dense)              (None, 2)                 258       
+ dense (Dense)             (None, 32)                640032    
+                                                                 
+ output (Dense)              (None, 2)                 66        
                                                                  
 =================================================================
-Total params: 2,561,282
-Trainable params: 2,561,282
+Total params: 640,994
+Trainable params: 640,994
 Non-trainable params: 0
 _________________________________________________________________
 ````
-For this configration of the final model, the evaluation with test data are the following:
 
-````
-Test loss:  0.8363 Test accuracy:  0.4286
-````
