@@ -8,6 +8,11 @@ The objective of this project, is to develop an machine learning model for class
 For this, I propose to build and train a deep learning model, taking a dataset of pistachios varieties as training data for the model.
 
 ## Pistachios
+
+<p align="center">
+  <img width="640" height="173" src="https://github.com/carrionalfredo/Capstone_1/blob/main/images/640px-Pistachio_vera.jpg">
+</p>
+
 ![alt text](https://github.com/carrionalfredo/Capstone_1/blob/main/images/640px-Pistachio_vera.jpg)
 
 [From THOR - Pistachio, CC BY 2.0](https://commons.wikimedia.org/w/index.php?curid=40606682)
@@ -64,7 +69,9 @@ Medium size fruit, long and similar to " Mateur ". It comes from Greece and it a
 
 ## Dataset
 
-The dataset used in this project is a dataset of 2148 600x600px jpeg images of pistachios, 1232 of Kirmizi type and 916 of Siirt type. This dataset was obtained from [Visualdata.io](https://visualdata.io), and can be found in this [link](https://visualdata.io/discovery/dataset/906f860910230c325f1fa63da88f6c847a06724a)
+The dataset used in this project is a dataset of 2148 600x600px jpeg images of pistachios, 1232 of Kirmizi type and 916 of Siirt type. This dataset was obtained from [Visualdata.io](https://visualdata.io), and can be found in this [link](https://visualdata.io/discovery/dataset/906f860910230c325f1fa63da88f6c847a06724a).
+
+The dataset used in thsi project can be downloaded form thsi [link](https://github.com/carrionalfredo/Capstone_1/blob/main/dataset/Pistachio_image_Dataset.zip).
 
 ![Dataset source](https://www.mdpi.com/electronics/electronics-11-00981/article_deploy/html/images/electronics-11-00981-g001.png)
 [source: Visualdata.io](https://visualdata.io/discovery/dataset/906f860910230c325f1fa63da88f6c847a06724a)
