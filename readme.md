@@ -13,8 +13,6 @@ For this, I propose to build and train a deep learning model, taking a dataset o
   <img width="640" height="173" src="https://github.com/carrionalfredo/Capstone_1/blob/main/images/640px-Pistachio_vera.jpg">
 </p>
 
-![alt text](https://github.com/carrionalfredo/Capstone_1/blob/main/images/640px-Pistachio_vera.jpg)
-
 [From THOR - Pistachio, CC BY 2.0](https://commons.wikimedia.org/w/index.php?curid=40606682)
 
 The pistachio (Pistacia vera), a member of the cashew family, is a small tree originating from Central Asia and the Middle East. The tree produces seeds that are widely consumed as food.
@@ -27,7 +25,7 @@ The main types found in the market are the Noble or Sicily pistachio, with a gre
 
 Usually, the pistachio varieties are classified according to their place of origin or culture. Each country has its own selections, whose main differences are the colour, flavour, size, period of harvesting and qualities.
 
-Some varieties of pistachios
+**Some varieties of pistachios**
 
 " Kerman"
 Pistachio nut of great size and good quality. Selected in Iran, it was introduced in the U.S.A. and it is also cultivated in Spain (in Castilla-La Mancha) where the fruit ripens during the first fortnight of September.
@@ -211,4 +209,55 @@ Trainable params: 640,994
 Non-trainable params: 0
 _________________________________________________________________
 ````
+## Dependency and Environment Managenent
 
+The trained model and its training logic has been exported to the ```train.py``` script, that generates the best performance ```.h5``` file.
+
+The file ```predict.py``` loads (in this case) the ```CS107_0995.h5``` model file and deploy it via web service with **Flask**.
+
+All the dependencies and the virtual environment used in this project are provided in the [```pipfile```]() uploaded in this repository.
+
+In order to install this dependencies and virtual environment, with ```Pipenv``` installed and once downloaded the ```pipfile``` and ```pipfile.lock``` files in the working directory, execute the next command:
+
+```
+pipenv install
+```
+
+This will install the dependencies from the ```pipfile.lock``` file. To activate the virtual environment for this project, run:
+
+```
+pipenv shell
+```
+Also, its posible run a command inside this virtual environment with:
+
+```pipenv run
+```
+
+Once activated the virtual environment, the model can be deployed via web service running the following command:
+```
+python predict.py
+```
+
+This will serve the '''pistachio-classifier''' Flask app in the port 9696.
+
+To verify that the classifier is working, use the ```test.py``` script. In another command window, go to the working directory, and run:
+ ```
+ test.py
+ ```
+ 
+If all is working OK, in the virtual environment command window, should return a "POST /classify HTTP/1.1" 200 - message, and in the another command window, should show the results of the prediction.
+
+For this example, the ```test.py``` script download and load into Keras the following pistachio image for classify it.
+
+![Pistachio for Test](https://github.com/carrionalfredo/Capstone_1/raw/main/images/Test_images/test_02.jpg)
+
+If all is working OK, the result of the classification shloud be similar to:
+
+```
+Kirmizi:  87.0 %
+Siirt:  13.0 %
+```
+
+Indicating that the pistachio image is 87% of Kimrizi variety.
+
+##
