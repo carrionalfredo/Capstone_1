@@ -8,7 +8,7 @@ COPY ["Pipfile", "Pipfile.lock", "./"]
 
 RUN pipenv install --system --deploy
 
-RUN pip install gunicorn
+RUN pip install pillow gunicorn flask
 
 COPY ["train.py", "predict.py", "CS107_0.995.h5", "./"]
 
