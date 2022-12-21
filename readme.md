@@ -151,9 +151,11 @@ model.compile(
     )
 ```
 
-For ompilation of the model, is used ``Adam`` optimizer and the loss function is ``SparseCategoricalCrossentropy``.
+For compilation of the model, is used ``Adam`` optimizer and the loss function is ``SparseCategoricalCrossentropy``.
 
-!['Base model](https://github.com/carrionalfredo/Capstone_1/blob/main/images/base_model.png)
+<p align="center">
+  <img alt="Base Model Architecture" src="https://github.com/carrionalfredo/Capstone_1/blob/main/images/base_model.png">
+</p>
 
 ## Training of the model
 
@@ -167,7 +169,9 @@ epochs = 100
 ```
 The training & validation accuracy and loss values obtained are the following:
 
-![Base model](https://github.com/carrionalfredo/Capstone_1/raw/main/images/Base_model_results.png)
+<p align="center">
+  <img width="600" height="400" alt="Base Model Results" src="https://github.com/carrionalfredo/Capstone_1/raw/main/images/Base_model_results.png">
+</p>
 
 ### Hyperparameters tuning
 
@@ -179,7 +183,9 @@ Also, the ```epochs``` parameter was set equals ```60```.
 
 The training & validation accuracy and loss values obtained for the final model are the following:
 
-![Final model](https://github.com/carrionalfredo/Capstone_1/raw/main/images/Final_model_results.png)
+<p align="center">
+  <img width="600" height="400" alt="Final Model Results" src="https://github.com/carrionalfredo/Capstone_1/raw/main/images/Final_model_results.png">
+<p>
 
 Finally, the summary of this final model is next.
 
@@ -230,7 +236,8 @@ pipenv shell
 ```
 Also, its posible run a command inside this virtual environment with:
 
-```pipenv run
+```
+pipenv run
 ```
 
 Once activated the virtual environment, the model can be deployed via web service running the following command:
@@ -249,7 +256,9 @@ If all is working OK, in the virtual environment command window, should return a
 
 For this example, the ```test.py``` script download and load into Keras the following pistachio image for classify it.
 
-![Pistachio for Test](https://github.com/carrionalfredo/Capstone_1/raw/main/images/Test_images/test_02.jpg)
+<p align="center">
+  <img src="https://github.com/carrionalfredo/Capstone_1/raw/main/images/Test_images/test_02.jpg" alt="Pistachio for Test" width="200"/>
+<p>
 
 If all is working OK, the result of the classification shloud be similar to:
 
