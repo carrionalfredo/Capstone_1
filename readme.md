@@ -217,11 +217,11 @@ _________________________________________________________________
 ````
 ## Dependency and Environment Managenent
 
-The trained model and its training logic has been exported to the ```train.py``` script, that generates the best performance ```.h5``` file.
+The trained model and its training logic has been exported to the [```train.py```](https://github.com/carrionalfredo/Capstone_1/raw/main/train.py) script, that generates the best performance ```.h5``` file.
 
-The file ```predict.py``` loads (in this case) the [```CS107_0995.h5```](https://github.com/carrionalfredo/Capstone_1/raw/main/CS107_0.995.h5) model file and deploy it via web service with **Flask**.
+The file [```predict.py```](https://github.com/carrionalfredo/Capstone_1/raw/main/predict.py) loads (in this case) the [```CS107_0995.h5```](https://github.com/carrionalfredo/Capstone_1/raw/main/CS107_0.995.h5) model file and deploy it via web service with **Flask**.
 
-All the dependencies and the virtual environment used in this project are provided in the [```pipfile```]() uploaded in this repository.
+All the dependencies and the virtual environment used in this project are provided in the [```pipfile```](https://github.com/carrionalfredo/Capstone_1/raw/main/Pipfile) uploaded in this repository.
 
 In order to install this dependencies and virtual environment, with ```Pipenv``` installed and once downloaded the ```pipfile``` and ```pipfile.lock``` files in the working directory, execute the next command:
 
@@ -245,9 +245,9 @@ Once activated the virtual environment, the model can be deployed via web servic
 python predict.py
 ```
 
-This will serve the ```pistachio-classifier``` Flask app in the port 9696.
+This will serve the ```pistachio-classifier``` Flask app in the port ```9696```.
 
-To verify that the classifier is working, use the ```test.py``` script. In another command window, go to the working directory, and run:
+To verify that the classifier is working, use the [```test.py```](https://github.com/carrionalfredo/Capstone_1/raw/main/test.py) script. In another command window, go to the working directory, and run:
  ```
  test.py
  ```
@@ -260,7 +260,7 @@ For this example, the ```test.py``` script download and load into Keras the foll
   <img src="https://github.com/carrionalfredo/Capstone_1/raw/main/images/Test_images/test_02.jpg" alt="Pistachio for Test" width="200"/>
 <p>
 
-If all is working OK, the result of the classification shloud be similar to:
+If all is working OK, the result of the classification should be similar to:
 
 ```
 Kirmizi:  85.0 %
@@ -273,19 +273,20 @@ Indicating that the pistachio image is 87% of Kimrizi variety.
 
 The model and dependencies were containerizated with **Docker**.
 
-To create a Docker image denominated `cs1` with the virtual environment and dependencies used in the model, start the Docker service, go to the working directory where the necesary `dockerfile` is, and run the following command:
+To create a Docker image denominated `cs1` with the virtual environment and dependencies used in the model, start the Docker service, go to the working directory where the necesary [`Dockerfile`](https://github.com/carrionalfredo/Capstone_1/raw/main/Dockerfile) is, and run the following command:
+
 ```
 docker build -t cs1 .
 ```
 
-The [`dockerfile`](https://github.com/carrionalfredo/Capstone_1/raw/main/Dockerfile) used to create the Docker image in this project, has been uploaded to this repository.
+The `Dockerfile` used to create the Docker image in this project, has been uploaded to this repository.
 
 To run the Docker image recently created, run this command:
 ```
 docker run -it --rm --entrypoint=bash cs1
 ```
 
- And for run the web service via **Gunicorn** of the ```pistachio-classifier``` app in the port `9696`, run the following command:
+And for run the web service via **Gunicorn** of the ```pistachio-classifier``` app in the port `9696`, run the following command:
 
 ```
 docker run -it --rm -p 9696:9696 cs1
@@ -303,6 +304,34 @@ The following messages should be show:
 After that, to test the deployed model, in another command window, run the `test.py` script.
 
 The result of the pistachio image classification ```Kirmizi:  85.0 %
-Siirt:  15.0 %```, should be show as response indicating that the conteinarized service is runnning and working OK.
+Siirt:  15.0 %```, should be show as response, indicating that the conteinarized service is runnning and working OK.
 
 ## Cloud Deployment
+
+Adicionally, the model was deployed in the cloud through **AWS Elastic Beanstalk**. For this, first an application called `cs1_classify` was created under the Docker platform, with the following command:
+
+        eb init -p docker -r us-east-1 cs1_classify
+
+After create the application, con be tested locally executing:
+
+        eb local run --port 9696
+
+If the application in online, the following message will appear.
+
+![](https://github.com/carrionalfredo/Capstone_1/raw/main/images/EB_local_run.jpg)
+
+In another command window, the application can be tested, executing the `test.py` script:
+
+And the result should be:
+
+![](https://github.com/carrionalfredo/Capstone_1/raw/main/images/EB_test.jpg)
+
+For deploy the web service in the cloud, the `cs1-env` environment was created with:
+
+        eb create cs1-env
+
+With the application addres provided by AWS, another test script was created ([`cloud_test.py`](https://github.com/carrionalfredo/Capstone_1/raw/main/cloud_test.py)).
+
+Running the `cloud_test.py` script in a command window, will return the prediction using the `cs1_env` environment and `cs1_classify` application created in the AWS cloud.
+
+![](https://github.com/carrionalfredo/Capstone_1/raw/main/images/EB_cloud_test.jpg)
